@@ -1,7 +1,7 @@
 package itextpractice.demo.controller;
 
 import com.lowagie.text.DocumentException;
-import itextpractice.demo.service.PdfService;
+import itextpractice.demo.service.openPdfService;
 import org.apache.pdfbox.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import java.io.IOException;
 public class PdfController {
 
     @Autowired
-    private PdfService pdfService;
+    private openPdfService openPdfService;
 
     @GetMapping("/")
     public String home() {
@@ -25,7 +25,7 @@ public class PdfController {
 
     @PostMapping("/generatePdfFile")
     public void generatePdfFile(HttpServletResponse response, String contentToGenerate) throws IOException, DocumentException {
-        ByteArrayInputStream byteArrayInputStream = pdfService.convertHtmlToPdf(contentToGenerate);
+        ByteArrayInputStream byteArrayInputStream = openPdfService.convertHtmlToPdf(contentToGenerate);
         response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition", "attachment; filename=file.pdf");
         IOUtils.copy(byteArrayInputStream, response.getOutputStream());

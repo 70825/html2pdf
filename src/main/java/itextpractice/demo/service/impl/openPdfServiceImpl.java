@@ -1,7 +1,7 @@
 package itextpractice.demo.service.impl;
 
 import com.lowagie.text.DocumentException;
-import itextpractice.demo.service.PdfService;
+import itextpractice.demo.service.openPdfService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 @Service
-public class PdfServiceImpl implements PdfService {
+public class openPdfServiceImpl implements openPdfService {
 
     @Override
     public ByteArrayInputStream convertHtmlToPdf(String htmlContent) throws DocumentException {
