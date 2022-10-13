@@ -5,11 +5,22 @@
 </head>
 <body>
 <div class="container">
-  <h1>Generate PDF File from HTML String</h1>
-  <form method="POST" enctype="multipart/form-data" action="/generatePdfFile">
+  <h1>Generate PDF File from HTML String Using openPDF</h1>
+  <form method="POST" enctype="multipart/form-data" action="/generatePdfFileUsingOpenPDF">
     <div class="mb-3">
-      <label for="contentToGenerate" class="form-label">Enter your HTML content to generate PDF file</label>
-      <textarea class="form-control form-control-lg" id="contentToGenerate" name="contentToGenerate" required></textarea>
+      <label for="contentOpenPDF" class="form-label">Enter your HTML content to generate PDF file</label>
+      <textarea class="form-control form-control-lg" id="contentOpenPDF" name="contentOpenPDF" required></textarea>
+    </div>
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary" style="margin-bottom: 100px">Generate PDF File</button>
+    </div>
+  </form>
+
+  <h1>Generate PDF File from HTML String Using iText</h1>
+  <form method="POST" enctype="multipart/form-data" action="/generatePdfFileUsingIText">
+    <div class="mb-3">
+      <label for="contentIText" class="form-label">Enter your HTML content to generate PDF file</label>
+      <textarea class="form-control form-control-lg" id="contentIText" name="contentOpenPDF" required></textarea>
     </div>
     <div class="mb-3">
       <button type="submit" class="btn btn-primary">Generate PDF File</button>

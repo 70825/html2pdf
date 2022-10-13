@@ -30,7 +30,6 @@ public class openPdfServiceImpl implements openPdfService {
     public String htmlToXhtml(String html) {
         Document document = Jsoup.parse(html);
         document.outputSettings().syntax(Document.OutputSettings.Syntax.xml);
-        System.out.print(document.html());
         return document.html();
     }
 }

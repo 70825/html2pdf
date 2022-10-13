@@ -1,6 +1,7 @@
 package itextpractice.demo.controller;
 
 import com.lowagie.text.DocumentException;
+import itextpractice.demo.service.iTextPdfService;
 import itextpractice.demo.service.openPdfService;
 import org.apache.pdfbox.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,25 @@ public class PdfController {
     @Autowired
     private openPdfService openPdfService;
 
+    @Autowired
+    private iTextPdfService iTextPdfService;
+
     @GetMapping("/")
     public String home() {
         return "index";
     }
 
-    @PostMapping("/generatePdfFile")
-    public void generatePdfFile(HttpServletResponse response, String contentToGenerate) throws IOException, DocumentException {
-        ByteArrayInputStream byteArrayInputStream = openPdfService.convertHtmlToPdf(contentToGenerate);
+    @PostMapping("/generatePdfFileUsingOpenPDF")
+    public void generatePdfFile(HttpServletResponse response, String contentOpenPDF) throws IOException, DocumentException {
+        ByteArrayInputStream byteArrayInputStream = openPdfService.convertHtmlToPdf(contentOpenPDF);
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; filename=file.pdf");
+        IOUtils.copy(byteArrayInputStream, response.getOutputStream());
+    }
+
+    @PostMapping("/generatePdfFileUsingIText")
+    public void generatePdfFileUsingIText(HttpServletResponse response, String contentIText) throws IOException {
+        ByteArrayInputStream byteArrayInputStream = iTextPdfService.createPdf(contentIText);
         response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition", "attachment; filename=file.pdf");
         IOUtils.copy(byteArrayInputStream, response.getOutputStream());
